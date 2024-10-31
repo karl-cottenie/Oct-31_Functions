@@ -1,1 +1,0 @@
-# This is the beginning of Coleman Eagle Olenick's Solution to the attached script
