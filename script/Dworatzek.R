@@ -13,3 +13,5 @@ GetBoldData <- function(data, bin_column, species_column) {
 }
 
 dfMice_final <- GetBoldData(dfMice, bin_column = "bin_uri", species_column = "species_name")
+
+dfWhales_final <- GetBoldData(dfWhales, bin_column = "bin_uri", species_column = "species_name")
