@@ -2,7 +2,7 @@
 library(tidyverse)
 library(dplyr)
 
-solveWorldHunger <- function(data_folder = "./Oct-31_Functions/Oct-31_Functions/data/") {
+solveWorldHunger <- function(data_folder = "./data/") {
   dfMice <- read_tsv(paste0(data_folder, "/mice.tsv"), show_col_types = FALSE) %>% na.exclude() # remove NAs
   dfWhales <- read_tsv(paste0(data_folder, "/whales.tsv"), show_col_types = FALSE) %>% na.exclude() # ""
   
@@ -12,7 +12,7 @@ solveWorldHunger <- function(data_folder = "./Oct-31_Functions/Oct-31_Functions/
               tally(name = "num_species") # wrapper for summarise(n = n())
 }
 
-dfs_bins_nspecies <- solveWorldHunger("./Oct-31_Functions/Oct-31_Functions/data/")
+dfs_bins_nspecies <- solveWorldHunger("./data/")
 
 # Proof
 View(dfs_bins_nspecies)
