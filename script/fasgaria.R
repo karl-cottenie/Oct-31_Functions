@@ -8,13 +8,23 @@ library(viridis)
 theme_set(theme_light())
 
 dfMice <- read_tsv("../data/mice.tsv")
-dfNew1 <- dfMice %>%
-  filter(!is.na(bin_uri) & !is.na(species_name)) %>%
-  distinct(bin_uri, species_name) %>%
-  count(bin_uri, name = "num_species")
+dfNew <- function(dfMice) {
+  dfMice %>%
+    filter(!is.na(bin_uri) & !is.na(species_name)) %>%
+    distinct(bin_uri, species_name) %>%                
+    count(bin_uri, name = "num_species")
+}
+resultsMice <- dfNew(dfMice)
+view(resultsMice)
+
+
 
 dfWhales <- read_tsv("../data/whales.tsv")
-dfNew2 <- dfWhales %>%
-  filter(!is.na(bin_uri) & !is.na(species_name)) %>%
-  distinct(bin_uri, species_name) %>%
-  count(bin_uri, name = "num_species")
+dfNew2 <- function(dfWhales) {
+  dfWhales %>%
+    filter(!is.na(bin_uri) & !is.na(species_name)) %>%
+    distinct(bin_uri, species_name) %>%                
+    count(bin_uri, name = "num_species")
+}
+resultsWhales <- dfNew2(dfWhales)
+view(resultsWhales)
