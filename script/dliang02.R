@@ -294,3 +294,14 @@ dfMice <- read_tsv("../data/mice.tsv")
 # Read in the data.
 dfWhales <- read_tsv("../data/whales.tsv")
 
+GetUniqueBin <- function(df) {
+  df <- na.omit(df) #Remove NAs
+  
+  results <- df |> #Find number of unique species in each bin
+    group_by(bin_uri) |> 
+    summarise(num_species = n_distinct(species_name))
+  
+  return(results) #Output the results 
+}
+
+
