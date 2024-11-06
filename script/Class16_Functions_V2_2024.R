@@ -294,3 +294,12 @@ dfMice <- read_tsv("../data/mice.tsv")
 # Read in the data.
 dfWhales <- read_tsv("../data/whales.tsv")
 
+# this is just from nov 5ths class
+fn_uniqueSpecies <- function(df) {
+  df.unique <- df %>%
+    filter(!is.na(bin_uri)) %>%
+    group_by(bin_uri) %>%
+    summarize(num_species = length(unique(species_name))) %>%
+    arrange(desc(num_species))
+  return(df.unique)
+}
