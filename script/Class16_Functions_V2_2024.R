@@ -129,7 +129,7 @@ MultiplyNumbers5(5, 10)  ## It works!
 #write.csv(dfSpecies, "fishbase.csv")
 
 # Read in the FishBase data.
-dfSpecies <- read.csv("../data/fishbase.csv")
+dfSpecies <- read.csv("data/fishbase.csv")
 # Check column names.
 names(dfSpecies)
 # Take only the columns that we need. These are columns containing data about the length of the species, longevity, maximum depth, body shape, and the zone which they inhabit.
@@ -286,11 +286,25 @@ sapply(dfSpecies, class)
 #dfMice <- read_tsv("http://www.boldsystems.org/index.php/API_Public/combined?taxon=Mus&geo=all&format=tsv")[, c("bin_uri",  "species_name")]
 #write_tsv(dfMice, "mice.tsv")
 # Read in the data.
-dfMice <- read_tsv("../data/mice.tsv")
+
+count_unique_species_per_bin <- function(data) {
+  data <- data %>% filter(!is.na(bin_uri), !is.na(species_name))
+  result <- data %>%
+    group_by(bin_uri) %>%
+    summarize(num_species = n_distinct(species_name), .groups = "drop")
+  
+  return(result)
+}
+dfMice <- read_tsv("data/mice.tsv")
 
 # How I obtained the whale data on November 3rd, 2021:
 #dfWhales <- read_tsv("http://www.boldsystems.org/index.php/API_Public/combined?taxon=Delphinidae&geo=all&format=tsv")[, c("bin_uri", "species_name")]
 #write_tsv(dfWhales, "whales.tsv")
 # Read in the data.
-dfWhales <- read_tsv("../data/whales.tsv")
+dfWhales <- read_tsv("data/whales.tsv")
 
+mice_unique_species <- count_unique_species_per_bin(dfMice)
+whales_unique_species <- count_unique_species_per_bin(dfWhales)
+
+print(mice_unique_species)
+print(whales_unique_species)
