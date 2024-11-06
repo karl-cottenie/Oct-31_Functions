@@ -288,6 +288,16 @@ sapply(dfSpecies, class)
 # Read in the data.
 dfMice <- read_tsv("../data/mice.tsv")
 
+GetSpecNum <- function(df) {
+  result <- df %>% 
+    na.omit() %>% 
+    group_by(bin_uri) %>% 
+    summarise(num_species = n_distinct(species_name))
+  return(result)
+}
+
+GetSpecNum(dfMice)
+
 # How I obtained the whale data on November 3rd, 2021:
 #dfWhales <- read_tsv("http://www.boldsystems.org/index.php/API_Public/combined?taxon=Delphinidae&geo=all&format=tsv")[, c("bin_uri", "species_name")]
 #write_tsv(dfWhales, "whales.tsv")
