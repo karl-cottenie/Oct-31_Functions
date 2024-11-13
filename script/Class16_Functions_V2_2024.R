@@ -13,7 +13,7 @@ conflicted::conflicts_prefer(dplyr::filter())
 library(viridis)
 # + scale_color/fill_viridis_c/d()
 theme_set(theme_light())
-#install.packages("rfishbase")
+# install.packages("rfishbase")
 library(rfishbase)
 
 # Startup ends here
@@ -120,16 +120,16 @@ MultiplyNumbers5(5, 10)  ## It works!
 
 # How I obtained the data from FishBase on November 3rd, 2021:
 # Get a vector of species names that have data available on FishBase for the order "Salmoniformes".
-#fish <- species_list(Order = "Salmoniformes")
+# fish <- species_list(Order = "Salmoniformes")
 # Check class.
-#class(fish)
+# class(fish)
 # Download data from the FishBase "Species table" using the species() function.
 # "The Species table is the heart of FishBase. This function provides a convenient way to query, tidy, and assemble data from that table given an entire list of species. For details, see: http://www.fishbase.org/manual/english/fishbasethe_species_table.htm "
-#dfSpecies <- data.frame(rfishbase::species(fish))
-#write.csv(dfSpecies, "fishbase.csv")
+# dfSpecies <- data.frame(rfishbase::species(fish))
+# write.csv(dfSpecies, "fishbase.csv")
 
 # Read in the FishBase data.
-dfSpecies <- read.csv("../data/fishbase.csv")
+dfSpecies <- read.csv("data/fishbase.csv")
 # Check column names.
 names(dfSpecies)
 # Take only the columns that we need. These are columns containing data about the length of the species, longevity, maximum depth, body shape, and the zone which they inhabit.
@@ -278,6 +278,8 @@ dfSpecies[, c("BodyShapeI", "DemersPelag")] <- lapply(dfSpecies[, c("BodyShapeI"
 # Check that it worked:
 sapply(dfSpecies, class)
 
+# rm(check,dfSpecies,test1,GetInfo,GetTraitInfo)
+
 #### FUNCTION CHALLENGES! ----
 
 # Given a dataframe of BOLD data, create a function that returns a dataframe with two columns: "bin_uri" and a new column with the number of unique species per BIN "num_species". The resulting dataframe should only have one row per BIN. Remember to remove NA values. Use the following dataframes as input for your function:
@@ -286,11 +288,10 @@ sapply(dfSpecies, class)
 #dfMice <- read_tsv("http://www.boldsystems.org/index.php/API_Public/combined?taxon=Mus&geo=all&format=tsv")[, c("bin_uri",  "species_name")]
 #write_tsv(dfMice, "mice.tsv")
 # Read in the data.
-dfMice <- read_tsv("../data/mice.tsv")
+dfMice <- read_tsv("data/mice.tsv")
 
 # How I obtained the whale data on November 3rd, 2021:
 #dfWhales <- read_tsv("http://www.boldsystems.org/index.php/API_Public/combined?taxon=Delphinidae&geo=all&format=tsv")[, c("bin_uri", "species_name")]
 #write_tsv(dfWhales, "whales.tsv")
 # Read in the data.
-dfWhales <- read_tsv("../data/whales.tsv")
-
+dfWhales <- read_tsv("data/whales.tsv")
